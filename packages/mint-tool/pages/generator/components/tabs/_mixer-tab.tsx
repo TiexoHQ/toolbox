@@ -1,18 +1,13 @@
-import { IAttributesData } from 'packages/mint-tool/components/mint-tool-page/data'
-
 import Grid from '@mui/material/Grid'
-
-import AttributesSelector from '../../../../components/attributes-selectors/attributes-selectors'
-
-import { klona } from 'klona/json'
+import { IAttributesData } from 'packages/mint-tool/components/mint-tool-page/data'
 import { useEffect, useState } from 'react'
+import AttributesSelector from '../../../../components/attributes-selectors/attributes-selectors'
 import NftPreview from '../../../../components/nft-preview/nft-preview'
-import { AttributionRounded } from '@mui/icons-material'
 
 interface IProps {
     attributesData: IAttributesData
 }
-const MixerTab: React.FC<IProps> = props => {
+const MixerTab: React.FC<IProps> = (props: IProps) => {
     const [attributesData, setAttributesData] = useState<IAttributesData>(props.attributesData)
 
     useEffect(() => {

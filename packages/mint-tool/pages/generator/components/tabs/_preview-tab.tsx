@@ -1,16 +1,15 @@
-import { INft } from 'packages/mint-tool/utils/nft-generator/types'
-import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import NftPreview from 'packages/mint-tool/components/nft-preview/nft-preview'
+import Typography from '@mui/material/Typography'
 import { IAttributesData } from 'packages/mint-tool/components/mint-tool-page/data'
-import { useEffect, useState } from 'react'
+import NftPreview from 'packages/mint-tool/components/nft-preview/nft-preview'
+import { INft } from 'packages/mint-tool/utils/nft-generator/types'
 
 interface IProps {
     nftList: INft[]
     attributesData: IAttributesData
 }
 
-const PreviewTab: React.FC<IProps> = ({ nftList, attributesData }) => {
+const PreviewTab: React.FC<IProps> = ({ nftList, attributesData }: IProps) => {
     const imagesMap = {}
     for (const image of attributesData.images) {
         if (!imagesMap[image.layerName]) imagesMap[image.layerName] = {}

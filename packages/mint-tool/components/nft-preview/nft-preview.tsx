@@ -5,7 +5,7 @@ interface IProps {
     images: string[]
 }
 
-const NftPreview: React.FC<IProps> = ({ images }) => {
+const NftPreview: React.FC<IProps> = ({ images }: IProps) => {
     const styles = useStyle()
     return (
         <div className={styles.root}>

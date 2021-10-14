@@ -17,5 +17,3 @@ storybook-static
 out
 build
 build-storybook.log
-
-*.log

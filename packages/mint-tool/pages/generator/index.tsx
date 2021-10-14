@@ -1,31 +1,24 @@
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
+import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
 import Tab from '@mui/material/Tab'
 import dynamic from 'next/dynamic'
 import { IAttributesData } from 'packages/mint-tool/components/mint-tool-page/data'
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
-
+import { INft, INftAttributesMap, SETTINGS_KEY } from 'packages/mint-tool/utils/nft-generator/types'
+import { useEffect, useRef, useState } from 'react'
 import AttributesTab from './components/tabs/_attributes-tab'
 import MixerTab from './components/tabs/_mixer-tab'
 import PreviewTab from './components/tabs/_preview-tab'
-
-import { useState, useRef, useEffect } from 'react'
-import {
-    INft,
-    INftAttributesMap,
-    INftGeneratorOptions,
-} from 'packages/mint-tool/utils/nft-generator/types'
-import { NftWorkerAction } from './types.worker'
-import { klona } from 'klona/json'
 import SettingsTab from './components/tabs/_settings-tab'
-// import data from './_dummy'
+import { NftWorkerAction } from './types.worker'
 import useStyle from './_index.style'
-import { Typography } from '@mui/material'
+import { demoSettings } from './_test-data'
 
 const LoadCollectionNoSSR = dynamic(() => import('./components/_load-collection'), {
     ssr: false,
@@ -51,6 +44,19 @@ const Generator = () => {
     const [nftList, setNftList] = useState<INft[]>([])
     const workerRef = useRef<Worker>()
     const [generateInProgress, setGenerateInProgress] = useState<boolean>(false)
+
+    // if no settings save in storage, save default
+    useEffect(() => {
+        if (!gDriveData?.collectionName) {
+            return
+        }
+        if (!localStorage.getItem(`${SETTINGS_KEY}#${gDriveData.collectionName}`)) {
+            localStorage.setItem(
+                `${SETTINGS_KEY}#${gDriveData.collectionName}`,
+                JSON.stringify(demoSettings)
+            )
+        }
+    }, [gDriveData])
 
     useEffect(() => {
         workerRef.current = new Worker(new URL('./_nft.worker.ts', import.meta.url))
@@ -107,9 +113,8 @@ const Generator = () => {
                                                 const attributes: INftAttributesMap = {}
                                                 for (const attribute of gDriveData?.attributes ||
                                                     []) {
-                                                    attributes[
-                                                        attribute.name
-                                                    ] = attribute.values.map(v => v.name)
+                                                    attributes[attribute.name] =
+                                                        attribute.values.map(v => v.name)
                                                     if (attribute.canMiss) {
                                                         attributes[attribute.name].unshift(
                                                             undefined
@@ -223,38 +228,3 @@ const Generator = () => {
 }
 
 export default Generator
-
-const OPTIONS: INftGeneratorOptions = {
-    maxTries: 9000,
-    randomSeed: 1234567890,
-
-    nftCount: 21,
-    attributesCompatibility: [
-        {
-            type: 'deny',
-            condition: {
-                or: [
-                    { and: [{ attributes: { Visor: '*' } }, { attributes: { Head: '*' } }] },
-                    {
-                        and: [
-                            { attributes: { Visor: 'undefined' } },
-                            { attributes: { Head: 'undefined' } },
-                        ],
-                    },
-                ],
-            },
-        },
-    ],
-    targets: {
-        rarity: [
-            {
-                rarityScore: { min: 0, max: Infinity },
-                attributesCount: { min: 4, max: 9 },
-                nftCount: 5000,
-            },
-        ],
-        attributesValuesOccurences: {
-            '*': { '*': { min: 1, max: 50 } },
-        },
-    },
-}

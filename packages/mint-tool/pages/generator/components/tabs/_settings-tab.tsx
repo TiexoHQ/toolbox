@@ -11,10 +11,11 @@ import {
     INftGeneratorAttributesCompatibility,
     INftGeneratorOptions,
     ITargetType,
+    SETTINGS_KEY,
 } from 'packages/mint-tool/utils/nft-generator/types'
 import React, { useEffect, useState } from 'react'
+import { demoSettings } from '../../_test-data'
 
-const SETTINGS_KEY = 'SETTINGS_KEY'
 interface ISettingsTab {
     attributesData: IAttributesData
 }
@@ -37,7 +38,6 @@ const SettingsTab: React.FC<ISettingsTab> = (props: ISettingsTab) => {
         if (savedSettings) {
             setOptions(JSON.parse(savedSettings) as INftGeneratorOptions)
         }
-        console.log('read from storage')
     }, [])
 
     console.log(options)
@@ -104,47 +104,6 @@ const SettingsTab: React.FC<ISettingsTab> = (props: ISettingsTab) => {
             </TabContext>
         </div>
     )
-}
-
-const demoSettings: INftGeneratorOptions = {
-    maxTries: 100000,
-    randomSeed: 1234567890,
-    nftCount: 100,
-    attributesCompatibility: [
-        {
-            type: 'deny',
-            condition: {
-                or: [
-                    { and: [{ attributes: { Visor: '*' } }, { attributes: { Head: '*' } }] },
-                    {
-                        and: [
-                            { attributes: { Visor: 'undefined' } },
-                            { attributes: { Head: 'undefined' } },
-                        ],
-                    },
-                ],
-            },
-        },
-    ],
-    targets: {
-        rarity: [
-            {
-                nftCount: 100,
-                rarityScore: {
-                    min: 1,
-                    max: 99999999,
-                },
-                attributesCount: {
-                    min: 4,
-                    max: 7,
-                },
-            },
-        ],
-        attributesValuesOccurences: {
-            Hair: { 'Red-Roman.png': { min: 1, max: 1 }, '*': { min: 1, max: 2 } },
-            '*': { '*': { min: 1, max: 50 } },
-        },
-    },
 }
 
 export default SettingsTab

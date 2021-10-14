@@ -13,7 +13,7 @@ export default createUseStyle(() => {
         image: css`
             display: block;
             max-width: 100%;
-            max-height: 890px; //100%;
+            max-height: 100%;
             top: 0;
             left: 0;
             /* left: 50%;

@@ -1,9 +1,5 @@
-import dynamic from 'next/dynamic'
+import GeneratorApp from './generator/index'
 
-const DynamicComponentWithNoSSR = dynamic(() => import('../components/mint-tool-page'), {
-    ssr: false,
-})
-
-const HomePage = () => <DynamicComponentWithNoSSR />
+const HomePage = () => <GeneratorApp />
 
 export default HomePage

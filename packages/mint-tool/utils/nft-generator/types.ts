@@ -124,3 +124,5 @@ export interface IAttributeDto {
     }>
     selectedValueName: string
 }
+
+export const SETTINGS_KEY = 'SETTINGS_KEY'

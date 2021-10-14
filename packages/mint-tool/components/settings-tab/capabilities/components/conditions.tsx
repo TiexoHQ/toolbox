@@ -205,7 +205,7 @@ const Conditions: React.FC<IConditionsProps> = (props: IConditionsProps) => {
                     <>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <p style={{ marginRight: 10 }}>Attributes: </p>
-                            {props.condition.attributes &&
+                            {props.condition?.attributes &&
                                 Object.keys(props.condition.attributes).map(attr => (
                                     <AttributeRender
                                         key={attr}

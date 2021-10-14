@@ -1,34 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
+# Install dependencies (yarn is needed as yarn workspaces are used)
+yarn
+
+# Run
+npm run dev-mint-tool
 # or
-yarn dev
+yarn dev-mint-tool
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+From the main page select `Open test project` button, this will populate the app with test data
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## App overview
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+At the top of the page there are two buttons:
+* `Generate` - this will trigger the algorithm
+* `Load other` - load other data, currently there is only one test data
 
-## Learn More
+Tabs:
+* `Attributes` - Visualize all possbile values for the nft, grouped by each layer, if a layer should not be present in final result => check **Allow undefined**
 
-To learn more about Next.js, take a look at the following resources:
+* `Mixer` - Playground where you can mix the NFTs
+* `Settings`
+    * `General`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+        **NFT count** - number of NFTs to be generated
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+        **Random seed** - using this on successive runs the algorithm will return same results, if no settings are changed
 
-## Deploy on Vercel
+        **Max tries** - maximim number of tries for the algorithm to find the final results to prevent infinite loop (usually can be set to 3 * **Nft count**)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    * `Compatibility`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+        Set of rules that can be used to define the compatibility between certain attributes
+    * `Targets`
+
+        **Rarity** - can define number of NFTs that should be generated with a certain rarity score and certain number of attributes
+
+        **Attribute occurence** - adjust the number of occurence for a specific attribute
+
+* `Preview`
+
+The results of the algoritm will be shown here

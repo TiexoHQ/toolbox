@@ -20,7 +20,7 @@ interface IProps {
     onDataUpdate?: (data: IAttributesData) => void
 }
 
-const AttributesTab: React.FC<IProps> = ({ data, onDataUpdate }) => {
+const AttributesTab: React.FC<IProps> = ({ data, onDataUpdate }: IProps) => {
     const [selectedTab, setSelectedTab] = useState<string>(data?.attributes[0]?.name || '')
 
     return (
