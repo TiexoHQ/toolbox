@@ -11,4 +11,6 @@ rsync -aP \
   --exclude=packages/mint-tool/node_modules \
   --exclude=packages/mint-tool/.next \
   --exclude=packages/mint-tool/out \
-  ./marketplace/ ./toolbox/
+  ../marketplace/ ./
+
+  cp packages/mint-tool/README.md ./README.md
