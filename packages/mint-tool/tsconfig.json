@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.json",
+
+    "compilerOptions": {
+        "lib": ["dom", "dom.iterable", "esnext", "webworker"],
+        "jsx": "preserve"
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "@tiexohq/marketplace-common",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+
+    "peerDependencies": {
+        "@emotion/react": "^11.4.1"
+    }
+}

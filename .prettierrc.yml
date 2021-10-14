@@ -1,0 +1,11 @@
+semi: false
+singleQuote: true
+arrowParens: avoid
+printWidth: 100
+tabWidth: 4
+parser: typescript
+
+overrides:
+  - files: "*.json"
+    options:
+      parser: json

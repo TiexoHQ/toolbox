@@ -1,0 +1,14 @@
+# Ignore artifacts:
+.history
+.vscode
+.DS_Store
+
+node_modules
+build-storybook.log
+storybook-static
+
+.next
+out
+build
+
+next.config.js
