@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack'
 import Tab from '@mui/material/Tab'
 import dynamic from 'next/dynamic'
 import { IAttributesData } from 'packages/mint-tool/components/mint-tool-page/data'
-import { INft, INftAttributesMap, SETTINGS_KEY } from 'packages/mint-tool/utils/nft-generator/types'
+import { INft, INftAttributesMap, StorageKeys } from 'packages/mint-tool/utils/nft-generator/types'
 import { useEffect, useRef, useState } from 'react'
 import AttributesTab from './components/tabs/_attributes-tab'
 import MixerTab from './components/tabs/_mixer-tab'
@@ -50,9 +50,9 @@ const Generator = () => {
         if (!gDriveData?.collectionName) {
             return
         }
-        if (!localStorage.getItem(`${SETTINGS_KEY}#${gDriveData.collectionName}`)) {
+        if (!localStorage.getItem(`${StorageKeys.SETTINGS_KEY}#${gDriveData.collectionName}`)) {
             localStorage.setItem(
-                `${SETTINGS_KEY}#${gDriveData.collectionName}`,
+                `${StorageKeys.SETTINGS_KEY}#${gDriveData.collectionName}`,
                 JSON.stringify(demoSettings)
             )
         }
@@ -76,13 +76,35 @@ const Generator = () => {
         }
     }, [])
 
+    const setLocalgDriveData = (data: IAttributesData, isUpdate = false) => {
+        if (isUpdate) {
+            const attrData = {}
+            data.attributes.forEach(attr => {
+                attrData[attr.name] = attr.canMiss
+            })
+            setGDriveData(data)
+            localStorage.setItem(
+                `${StorageKeys.ATTRIBUTES}#${data.collectionName}`,
+                JSON.stringify(attrData)
+            )
+        } else {
+            const attrData = JSON.parse(
+                localStorage.getItem(`${StorageKeys.ATTRIBUTES}#${data.collectionName}`) || '{}'
+            )
+            data?.attributes?.forEach(attr => {
+                attr.canMiss = attr.name in attrData ? attrData[attr.name] : attr.canMiss
+            })
+            setGDriveData(data)
+        }
+    }
+
     return (
         <div className={style.root}>
             {screenState === ScreenState.LOAD_FILES && (
                 <LoadCollectionNoSSR
                     onCollectionLoaded={data => {
                         if (data) {
-                            setGDriveData(data)
+                            setLocalgDriveData(data)
                             setScreenState(ScreenState.MINT_TOOL)
                         }
                     }}
@@ -124,7 +146,7 @@ const Generator = () => {
 
                                                 const options = JSON.parse(
                                                     localStorage.getItem(
-                                                        `SETTINGS_KEY#${gDriveData?.collectionName}`
+                                                        `${StorageKeys.SETTINGS_KEY}#${gDriveData?.collectionName}`
                                                     ) || '{}'
                                                 )
 
@@ -160,7 +182,7 @@ const Generator = () => {
                                             size="small"
                                             onClick={() => {
                                                 setScreenState(ScreenState.LOAD_FILES)
-                                                setGDriveData({} as any)
+                                                setLocalgDriveData({} as any)
                                             }}
                                         >
                                             Load other
@@ -189,7 +211,7 @@ const Generator = () => {
                                     <AttributesTab
                                         data={gDriveData}
                                         onDataUpdate={data => {
-                                            setGDriveData(data)
+                                            setLocalgDriveData(data, true)
                                         }}
                                     />
                                 </TabPanel>

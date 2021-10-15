@@ -11,7 +11,7 @@ import {
     INftGeneratorAttributesCompatibility,
     INftGeneratorOptions,
     ITargetType,
-    SETTINGS_KEY,
+    StorageKeys,
 } from 'packages/mint-tool/utils/nft-generator/types'
 import React, { useEffect, useState } from 'react'
 import { demoSettings } from '../../_test-data'
@@ -33,7 +33,7 @@ const SettingsTab: React.FC<ISettingsTab> = (props: ISettingsTab) => {
 
     useEffect(() => {
         const savedSettings = localStorage.getItem(
-            `${SETTINGS_KEY}#${props.attributesData.collectionName}`
+            `${StorageKeys.SETTINGS_KEY}#${props.attributesData.collectionName}`
         )
         if (savedSettings) {
             setOptions(JSON.parse(savedSettings) as INftGeneratorOptions)
@@ -45,7 +45,7 @@ const SettingsTab: React.FC<ISettingsTab> = (props: ISettingsTab) => {
     const setLocalOptions = (options: INftGeneratorOptions) => {
         setOptions(options)
         localStorage.setItem(
-            `${SETTINGS_KEY}#${props.attributesData.collectionName}`,
+            `${StorageKeys.SETTINGS_KEY}#${props.attributesData.collectionName}`,
             JSON.stringify(options)
         )
     }

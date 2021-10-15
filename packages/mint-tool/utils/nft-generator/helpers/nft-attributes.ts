@@ -16,17 +16,17 @@ const evaluateCondition = (
     nft: INft,
     condition: INftGeneratorAttributesCompatibilityCondition
 ): boolean => {
-    if (condition.and && Array.isArray(condition.and)) {
+    if (condition?.and && Array.isArray(condition.and)) {
         for (const andCondition of condition.and) {
             if (!evaluateCondition(nft, andCondition)) return false
         }
         return true
-    } else if (condition.or && Array.isArray(condition.or)) {
+    } else if (condition?.or && Array.isArray(condition.or)) {
         for (const orCondition of condition.or) {
             if (evaluateCondition(nft, orCondition)) return true
         }
         return false
-    } else if (condition.attributes) {
+    } else if (condition?.attributes) {
         const attributesNames = Object.keys(condition.attributes)
 
         for (const attributeName of attributesNames) {

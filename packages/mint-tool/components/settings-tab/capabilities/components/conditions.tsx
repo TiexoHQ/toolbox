@@ -61,13 +61,23 @@ const Conditions: React.FC<IConditionsProps> = (props: IConditionsProps) => {
         if (!newAttribute || newAttribute === '-') {
             return
         }
-        const newCondition: INftGeneratorAttributesCompatibilityCondition = {
-            ...props.condition,
-            attributes: {
-                ...props.condition.attributes,
-                [newAttribute]: '*',
-            },
+        let newCondition: INftGeneratorAttributesCompatibilityCondition
+        if (props.condition) {
+            newCondition = {
+                ...props.condition,
+                attributes: {
+                    ...props.condition.attributes,
+                    [newAttribute]: '*',
+                },
+            }
+        } else {
+            newCondition = {
+                attributes: {
+                    [newAttribute]: '*',
+                },
+            }
         }
+
         props.onChange(newCondition, AttrType.ATTRIBUTES, props.index)
         setNewAttribute('-')
     }

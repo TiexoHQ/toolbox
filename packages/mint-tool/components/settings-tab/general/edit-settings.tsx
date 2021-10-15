@@ -1,4 +1,5 @@
 import { Grid, TextField } from '@mui/material'
+import { isNumber } from 'packages/mint-tool/utils/nft-generator/helpers/other'
 import { INftGeneratorOptions } from 'packages/mint-tool/utils/nft-generator/types'
 import React from 'react'
 
@@ -8,6 +9,10 @@ interface IEditSettingsProps {
 }
 
 const EditSettings: React.FC<IEditSettingsProps> = (props: IEditSettingsProps) => {
+    const onChange = (value: any, field: keyof INftGeneratorOptions) => {
+        props.onChange(isNumber(value) ? Number(value) : (value as any), field)
+    }
+
     return (
         <Grid
             container
@@ -23,7 +28,7 @@ const EditSettings: React.FC<IEditSettingsProps> = (props: IEditSettingsProps) =
                     variant="outlined"
                     type="number"
                     value={props.options?.nftCount}
-                    onChange={e => props.onChange(Number(e.target.value), 'nftCount')}
+                    onChange={e => onChange(e.target.value, 'nftCount')}
                 />
             </Grid>
 
@@ -33,7 +38,7 @@ const EditSettings: React.FC<IEditSettingsProps> = (props: IEditSettingsProps) =
                     variant="outlined"
                     type="number"
                     value={props.options?.randomSeed}
-                    onChange={e => props.onChange(Number(e.target.value), 'randomSeed')}
+                    onChange={e => onChange(e.target.value, 'randomSeed')}
                 />
             </Grid>
 
@@ -43,7 +48,7 @@ const EditSettings: React.FC<IEditSettingsProps> = (props: IEditSettingsProps) =
                     variant="outlined"
                     type="number"
                     value={props.options?.maxTries}
-                    onChange={e => props.onChange(Number(e.target.value), 'maxTries')}
+                    onChange={e => onChange(e.target.value, 'maxTries')}
                 />
             </Grid>
         </Grid>

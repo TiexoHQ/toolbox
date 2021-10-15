@@ -1,6 +1,7 @@
+## Who we are
 We are known in the blockchain ecosystem as [Moonlet](https://moonlet.io) Team, a non-custodial digital asset wallet and a node operator for several blockchain networks, and being able to build an NFT marketplace is something we have set out to achieve for some time. We are really excited join the NFT movement and build [TIEXO](https://tiexo.com).
 
-Our main goal is to build a generative NFT art toolbox in order to help artists launch large collections. Basically we would like to offer a new set of tools and simplified processes to make the generative NFT art a few clicks away.
+Our main goal is to build a generative NFT art toolbox in order to help artists launch large collections. Basically we would like to offer a new set of tools and simplified processes to make the generative NFT art a few clicks away. Please find below more details about how you can run locally our project.
 
 
 ## Getting Started
@@ -59,22 +60,32 @@ Tabs:
 
 The current form is just a proof of concept, but in the next period we will extend the tool, our goal is to help artists publish their art without interacting with code or cli.
 
-So ar short term goals, we want to:
+Short term goals:
 - add a backend component
 - save information about collections in our database
 - let artists add multiple collections and manage them in parallel 
 - make nft mixer follow attribute compatibility rules
-- an option to update copatibility rules from nft mixer
-- make generation settings UI more friendly, and add helping texts so artists understad what are doing
-- improove generation algorithm:
+- an option to update compatibility rules from nft mixer
+- make generation settings UI more friendly, and add helping texts so artists understand what are doing
+- improve generation algorithm:
     - implement a way to stop the execution
     - add a progress bar on UI
-    - ability to run the algoritm in cloud, maybe a serverless function
-    - ability to run the algoritm multiple times while keeping previously generated nfts
+    - ability to run the algorithm in cloud, maybe a serverless function
+    - ability to run the algorithm multiple times while keeping previously generated nfts
 - improve Preview functionality:
     - add more information about an nft (attributes info, rarity score, rank)
     - ability to mark an nft as invalid
-- add export feature, to export the collection for candymachine use
+- add export feature, to export the collection for candy machine use
 
-Long term goal: 
+Long term goals: 
 - improve the tool so the artists could generate nfts, mint them or create candy machine and after the collection is live to view stats about the collection.
+- we would like also to launch the mobile app suite and leverage what we currently have build within Moonlet.
+
+## Where to find us
+🌟 Follow us: https://twitter.com/tiexohq
+
+🌟 Visit our website: https://tiexo.com/
+
+🌟 Join our Discord: _Coming Soon_
+
+🌟 Check our profile: https://www.instagram.com/tiexohq/

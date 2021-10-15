@@ -229,14 +229,33 @@ export const testData = {
 }
 
 export const demoSettings: INftGeneratorOptions = {
-    maxTries: 100,
+    maxTries: 300,
     randomSeed: 1234567890,
-    nftCount: 10,
-    attributesCompatibility: [],
+    nftCount: 50,
+    attributesCompatibility: [
+        {
+            type: 'deny',
+            name: 'punk hair + red eyes = not ok',
+            condition: {
+                and: [
+                    {
+                        attributes: {
+                            Hair: ['Punk Multicolor.png'],
+                        },
+                    },
+                    {
+                        attributes: {
+                            Eyes: ['Red.png'],
+                        },
+                    },
+                ],
+            },
+        },
+    ],
     targets: {
         rarity: [
             {
-                nftCount: 10,
+                nftCount: 25,
                 rarityScore: {
                     min: 1,
                     max: 99999999,
@@ -248,7 +267,11 @@ export const demoSettings: INftGeneratorOptions = {
             },
         ],
         attributesValuesOccurences: {
-            '*': { '*': { min: 1, max: 50 } },
+            Hair: {
+                'Baby-Yellow.png': {
+                    max: 10,
+                },
+            },
         },
     },
 }
