@@ -6,7 +6,9 @@ Our main goal is to build a generative NFT art toolbox in order to help artists 
 
 ## Getting Started
 
-First, run the development server:
+Open [https://toolbox.tiexo.dev](https://toolbox.tiexo.dev)
+
+Or if you wish, run the development server:
 
 ```bash
 # Install dependencies (yarn is needed as yarn workspaces are used)
