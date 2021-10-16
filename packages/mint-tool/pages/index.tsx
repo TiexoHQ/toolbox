@@ -1,4 +1,4 @@
-import GeneratorApp from './generator/index'
+import GeneratorApp from '../components/generator/index'
 
 const HomePage = () => <GeneratorApp />
 
